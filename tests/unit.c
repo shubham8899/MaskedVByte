@@ -5,7 +5,10 @@
 #include "varintdecode.h"
 
 int main() {
-	int N = 4096;
+	// int N = 4096;
+
+	int N;
+	scanf("%d", &N);
 	uint32_t * datain = malloc(N * sizeof(uint32_t));
 	uint8_t * compressedbuffer = malloc(2 * N * sizeof(uint32_t));
 	uint32_t * recovdata = malloc(N * sizeof(uint32_t));

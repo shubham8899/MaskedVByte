@@ -1,0 +1,5 @@
+project: maskedvbyte
+target: unit
+
+cmds:
+    - cmd: /unit
