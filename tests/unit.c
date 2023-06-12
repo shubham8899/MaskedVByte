@@ -14,8 +14,8 @@ int main() {
 	uint32_t * recovdata = malloc(N * sizeof(uint32_t));
 
 	for (int length = 0; length <= N; ) {
-		printf("length = %d \n",length);
-		printf("Regular VByte \n");
+// 		printf("length = %d \n",length);
+// 		printf("Regular VByte \n");
 		for (uint32_t gap = 1; gap <= 387420489; gap *= 3) {
 			for (int k = 0; k < length; ++k)
 				datain[k] = gap;
@@ -23,30 +23,30 @@ int main() {
 			size_t usedbytes = masked_vbyte_decode(compressedbuffer, recovdata,
 					length);
 			if (compsize != usedbytes) {
-				printf("[masked_vbyte_decode] code is buggy gap = %d, size mismatch %d %d \n",(int) gap, (int) compsize, (int) usedbytes);
+// 				printf("[masked_vbyte_decode] code is buggy gap = %d, size mismatch %d %d \n",(int) gap, (int) compsize, (int) usedbytes);
 				return -1;
 			}
 			for (int k = 0; k < length; ++k) {
 				if (recovdata[k] != datain[k]) {
-					printf("[masked_vbyte_decode] code is buggy gap = %d\n", (int) gap);
+// 					printf("[masked_vbyte_decode] code is buggy gap = %d\n", (int) gap);
 					return -1;
 				}
 			}
 			size_t decodedints = masked_vbyte_decode_fromcompressedsize(compressedbuffer, recovdata,
 					compsize);
 			if (decodedints != (size_t) length) {
-				printf("[masked_vbyte_decode_fromcompressedsize] code is buggy gap = %d, size mismatch %d %d \n",(int) gap, (int) compsize, (int) usedbytes);
+// 				printf("[masked_vbyte_decode_fromcompressedsize] code is buggy gap = %d, size mismatch %d %d \n",(int) gap, (int) compsize, (int) usedbytes);
 				return -1;
 			}
 			for (int k = 0; k < length; ++k) {
 				if (recovdata[k] != datain[k]) {
-					printf("[masked_vbyte_decode_fromcompressedsize] code is buggy gap = %d\n",(int) gap);
+// 					printf("[masked_vbyte_decode_fromcompressedsize] code is buggy gap = %d\n",(int) gap);
 					return -1;
 				}
 			}
 
 		}
-		printf("Delta VByte \n");
+// 		printf("Delta VByte \n");
 		for (size_t gap = 1; gap <= 531441; gap *= 3) {
 			for (int k = 0; k < length; ++k)
 				datain[k] = gap * k;
@@ -54,24 +54,24 @@ int main() {
 			size_t usedbytes = masked_vbyte_decode_delta(compressedbuffer, recovdata,
 					length,0);
 			if (compsize != usedbytes) {
-				printf("[masked_vbyte_decode_delta] code is buggy gap = %d, size mismatch %d %d \n",(int) gap, (int) compsize, (int) usedbytes);
+// 				printf("[masked_vbyte_decode_delta] code is buggy gap = %d, size mismatch %d %d \n",(int) gap, (int) compsize, (int) usedbytes);
 				return -1;
 			}
 			for (int k = 0; k < length; ++k) {
 				if (recovdata[k] != datain[k]) {
-					printf("[masked_vbyte_decode_delta] code is buggy gap = %d\n", (int) gap);
+// 					printf("[masked_vbyte_decode_delta] code is buggy gap = %d\n", (int) gap);
 					return -1;
 				}
 			}
 			size_t decodedints = masked_vbyte_decode_fromcompressedsize_delta(compressedbuffer, recovdata,
 					compsize,0);
 			if (decodedints != (size_t) length) {
-				printf("[masked_vbyte_decode_fromcompressedsize_delta] code is buggy gap = %d, size mismatch %d %d \n",(int) gap, (int) compsize, (int) usedbytes);
+// 				printf("[masked_vbyte_decode_fromcompressedsize_delta] code is buggy gap = %d, size mismatch %d %d \n",(int) gap, (int) compsize, (int) usedbytes);
 				return -1;
 			}
 			for (int k = 0; k < length; ++k) {
 				if (recovdata[k] != datain[k]) {
-					printf("[masked_vbyte_decode_fromcompressedsize_delta] code is buggy gap = %d\n",(int) gap);
+// 					printf("[masked_vbyte_decode_fromcompressedsize_delta] code is buggy gap = %d\n",(int) gap);
 					return -1;
 				}
 			}
@@ -88,7 +88,7 @@ int main() {
 	free(datain);
 	free(compressedbuffer);
 	free(recovdata);
-	printf("Code looks good.\n");
+// 	printf("Code looks good.\n");
 	return 0;
 }
 
